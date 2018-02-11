@@ -1,5 +1,5 @@
 # LazySchoolboyUtil
-File Generator students that are either lazy or don't have time at all.
+File Generator for students that are either lazy or don't have time at all.
 
 # What is it good for?
 Well, I guess that every student knows the situation when they must submit their homework or a project but they haven't even started working or just don't have much time left. And this is the "solution". Well, not really a solution (to be exact) but something that can give you some more time to finish you project.
