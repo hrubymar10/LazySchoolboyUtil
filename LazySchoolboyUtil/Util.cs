@@ -176,15 +176,15 @@ namespace LazySchoolboyUtil
             toReturn.Add(new Format("rm", "audio/x-pn-realaudio", 0, new byte[] { 0x2E, 0x52, 0x4D, 0x46 }));
             toReturn.Add(new Format("ra", "audio/x-realaudio", 0, new byte[] { 0x2E, 0x72, 0x61, 0xFD, 0x00 }));
             toReturn.Add(new Format("wav", "audio/x-wav", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
-            toReturn.Add(new Format("webp", "audio/webp", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
-            toReturn.Add(new Format("pgm", "audio/x-portable-graymap", 0, new byte[] { 0x50, 0x35, 0x0A }));
-            toReturn.Add(new Format("rgb", "audio/x-rgb", 0, new byte[] { 0x01, 0xDA, 0x01, 0x01, 0x00, 0x03 }));
-            toReturn.Add(new Format("webm", "audio/webm", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
-            toReturn.Add(new Format("flv", "audio/x-flv", 0, new byte[] { 0x6, 0x4C, 0x56, 0x01 }));
-            toReturn.Add(new Format("mkv", "audio/x-matroska", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
-            toReturn.Add(new Format("asx", "audio/x-ms-asf", 0, new byte[] { 0x3C }));
-            toReturn.Add(new Format("wmv", "audio/x-ms-wmv", 0, new byte[] { 0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C }));
-            toReturn.Add(new Format("avi", "audio/x-msvideo", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
+            toReturn.Add(new Format("webp", "image/webp", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
+            toReturn.Add(new Format("pgm", "image/x-portable-graymap", 0, new byte[] { 0x50, 0x35, 0x0A }));
+            toReturn.Add(new Format("rgb", "image/x-rgb", 0, new byte[] { 0x01, 0xDA, 0x01, 0x01, 0x00, 0x03 }));
+            toReturn.Add(new Format("webm", "video/webm", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
+            toReturn.Add(new Format("flv", "video/x-flv", 0, new byte[] { 0x6, 0x4C, 0x56, 0x01 }));
+            toReturn.Add(new Format("mkv", "video/x-matroska", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
+            toReturn.Add(new Format("asx", "video/x-ms-asf", 0, new byte[] { 0x3C }));
+            toReturn.Add(new Format("wmv", "video/x-ms-wmv", 0, new byte[] { 0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C }));
+            toReturn.Add(new Format("avi", "video/x-msvideo", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
 
             return toReturn;
         }
