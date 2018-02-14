@@ -14,13 +14,14 @@ namespace LazySchoolboyUtil
         public static void GenerateFile(string path, int size, Format format)
         {
             progress = 0;
+            
             byte[] bytesToBeSaved = new byte[size];
 
             rand.GetBytes(bytesToBeSaved);
 
             for (int i = format.GetOffset(); i <= format.GetOffset() + format.GetMagicNumbers().Length - 1; i++)
             {
-                progress = i / (format.GetMagicNumbers().LongLength / 100);
+                progress = (double)i / ((double)format.GetMagicNumbers().Length / (double)100);
                 bytesToBeSaved[i] = format.GetMagicNumbers()[i - format.GetOffset()];
             }
 
