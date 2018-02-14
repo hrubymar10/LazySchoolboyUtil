@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 
@@ -7,7 +6,7 @@ namespace LazySchoolboyUtil
 {
     public static class Util
     {
-        public static string version = "1.3";
+        public static string version = "1.4";
         public static double progress;
 
         static RNGCryptoServiceProvider rand = new RNGCryptoServiceProvider();
@@ -18,25 +17,18 @@ namespace LazySchoolboyUtil
             byte[] bytesToBeSaved = new byte[size];
 
             rand.GetBytes(bytesToBeSaved);
+
             for (int i = format.GetOffset(); i <= format.GetOffset() + format.GetMagicNumbers().Length - 1; i++)
             {
-                try
-                {
-                    Debug.WriteLine("b1");
-                    progress = i / (format.GetMagicNumbers().LongLength / 100);
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.WriteLine("b2");
-                    Debug.WriteLine(ex.Message);
-                }
-
+                progress = i / (format.GetMagicNumbers().LongLength / 100);
                 bytesToBeSaved[i] = format.GetMagicNumbers()[i - format.GetOffset()];
             }
+
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 fs.Write(bytesToBeSaved, 0, bytesToBeSaved.Length);
             }
+            
             progress = 100;
         }
 
@@ -132,8 +124,67 @@ namespace LazySchoolboyUtil
             toReturn.Add(new Format("jpeg", "image/jpeg", 0, new byte[] { 0xFF, 0xD8 }));
             toReturn.Add(new Format("jpe", "image/jpeg", 0, new byte[] { 0xFF, 0xD8 }));
             toReturn.Add(new Format("jfif", "image/jpeg", 0, new byte[] { 0xFF, 0xD8 }));
-
-            //TODO: Add other formats
+            toReturn.Add(new Format("png", "image/png", 0, new byte[] { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A }));
+            toReturn.Add(new Format("tiff", "image/tiff", 0, new byte[] { 0x4D, 0x4D, 0x00, 0x2B }));
+            toReturn.Add(new Format("tif", "image/tiff", 0, new byte[] { 0x4D, 0x4D, 0x00, 0x2B }));
+            toReturn.Add(new Format("psd", "image/vnd.adobe.photoshop", 0, new byte[] { 0x38, 0x42, 0x50, 0x53 }));
+            toReturn.Add(new Format("dwg", "image/vnd.dwg", 0, new byte[] { 0x41, 0x43, 0x31, 0x30 }));
+            toReturn.Add(new Format("ico", "image/vnd.microsoft.icon", 0, new byte[] { 0x00, 0x00, 0x01, 0x00 }));
+            toReturn.Add(new Format("mdi", "image/vnd.ms-modi", 0, new byte[] { 0x45, 0x50 }));
+            toReturn.Add(new Format("hdr", "image/vnd.radiance", 0, new byte[] { 0x49, 0x53, 0x63, 0x28 }));
+            toReturn.Add(new Format("pcx", "image/vnd.zbrush.pcx", 512, new byte[] { 0x09, 0x08, 0x10, 0x00, 0x00, 0x06, 0x05, 0x00 }));
+            toReturn.Add(new Format("wmf", "image/wmf", 0, new byte[] { 0xD7, 0xCD, 0xC6, 0x9A }));
+            toReturn.Add(new Format("eml", "message/rfc822", 0, new byte[] { 0x52, 0x65, 0x74, 0x75, 0x72, 0x6E, 0x2D, 0x50, 0x61, 0x74, 0x68, 0x3A, 0x20 }));
+            toReturn.Add(new Format("art", "message/rfc822", 0, new byte[] { 0x4A, 0x47, 0x04, 0x0E }));
+            toReturn.Add(new Format("manifest", "text/cache-manifest", 0, new byte[] { 0x3C, 0x3F, 0x78, 0x6D, 0x6C, 0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x3D }));
+            toReturn.Add(new Format("log", "text/plain", 0, new byte[] { 0x2A, 0x2A, 0x2A, 0x20, 0x20, 0x49, 0x6E, 0x73, 0x74, 0x61, 0x6C, 0x6C, 0x61, 0x74, 0x69, 0x6F, 0x6E, 0x20, 0x53, 0x74, 0x61, 0x72, 0x74, 0x65, 0x64, 0x20 }));
+            toReturn.Add(new Format("tsv", "text/tab-separated-values", 0, new byte[] { 0x47 }));
+            toReturn.Add(new Format("vcf", "text/vcard", 0, new byte[] { 0x42, 0x45, 0x47, 0x49, 0x4E, 0x3A, 0x56, 0x43, 0x41, 0x52, 0x44, 0x0D, 0x0A }));
+            toReturn.Add(new Format("dms", "text/vnd.DMClientScript", 0, new byte[] { 0x44, 0x4D, 0x53, 0x21 }));
+            toReturn.Add(new Format("dot", "text/vnd.graphviz", 0, new byte[] { 0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1 }));
+            toReturn.Add(new Format("ts", "text/vnd.trolltech.linguist", 0, new byte[] { 0x47 }));
+            toReturn.Add(new Format("3gp", "text/3gpp", 0, new byte[] { 0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x33, 0x67, 0x70 }));
+            toReturn.Add(new Format("3g2", "text/3gpp2", 0, new byte[] { 0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x33, 0x67, 0x70 }));           
+            toReturn.Add(new Format("mp4", "text/mp4", 4, new byte[] { 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6F, 0x6D }));
+            toReturn.Add(new Format("m4v", "text/mp4", 4, new byte[] { 0x66, 0x74, 0x79, 0x70, 0x6D, 0x70, 0x34, 0x32 }));
+            toReturn.Add(new Format("mpeg", "text/mpeg", 0, new byte[] { 0xFF, 0xD8 }));
+            toReturn.Add(new Format("mpg", "text/mpeg", 0, new byte[] { 0xFF, 0xD8 }));
+            toReturn.Add(new Format("ogv", "text/ogg", 0, new byte[] { 0x4F, 0x67, 0x67, 0x53, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }));
+            toReturn.Add(new Format("mov", "text/quicktime", 4, new byte[] { 0x6D, 0x6F, 0x6F, 0x76 }));
+            toReturn.Add(new Format("cpt", "application/mac-compactpro", 0, new byte[] { 0x43, 0x50, 0x54, 0x46, 0x49, 0x4C, 0x45 }));
+            toReturn.Add(new Format("sxc", "application/vnd.sun.xml.calc", 0, new byte[] { 0x50, 0x4B, 0x03, 0x04 }));
+            toReturn.Add(new Format("sxd", "application/vnd.sun.xml.draw", 0, new byte[] { 0x50, 0x4B, 0x03, 0x04 }));
+            toReturn.Add(new Format("sxi", "application/vnd.sun.xml.impress", 0, new byte[] { 0x50, 0x4B, 0x03, 0x04 }));
+            toReturn.Add(new Format("sxw", "application/vnd.sun.xml.writer", 0, new byte[] { 0x50, 0x4B, 0x03, 0x04 }));
+            toReturn.Add(new Format("bz2", "application/x-bzip2", 0, new byte[] { 0x42, 0x5A, 0x68 }));
+            toReturn.Add(new Format("vcd", "application/x-cdlink", 0, new byte[] { 0x45, 0x4E, 0x54, 0x52, 0x59, 0x56, 0x43, 0x44, 0x02, 0x00, 0x00, 0x01, 0x02, 0x00, 0x18, 0x58 }));
+            toReturn.Add(new Format("csh", "application/x-csh", 0, new byte[] { 0x63, 0x75, 0x73, 0x68, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 }));
+            toReturn.Add(new Format("spl", "application/x-futuresplash", 0, new byte[] { 0x00, 0x00, 0x01, 0x00 }));
+            toReturn.Add(new Format("jar", "application/x-java-archive", 0, new byte[] { 0x5F, 0x27, 0xA8, 0x89 }));
+            toReturn.Add(new Format("rpm", "application/x-rpm", 0, new byte[] { 0xED, 0xAB, 0xEE, 0xDB }));
+            toReturn.Add(new Format("swf", "application/x-shockwave-flash", 0, new byte[] { 0x5A, 0x57, 0x53 }));
+            toReturn.Add(new Format("sit", "application/x-stuffit", 0, new byte[] { 0x53, 0x49, 0x54, 0x21, 0x00 }));
+            toReturn.Add(new Format("tar", "application/x-tar", 257, new byte[] { 0x75, 0x73, 0x74, 0x61, 0x72 }));
+            toReturn.Add(new Format("xpi", "application/x-xpinstall", 0, new byte[] { 0x50, 0x4B, 0x03, 0x04 }));
+            toReturn.Add(new Format("xz", "application/x-xz", 0, new byte[] { 0xFD, 0x37, 0x7A, 0x58, 0x5A, 0x00 }));
+            toReturn.Add(new Format("mid", "audio/midi", 0, new byte[] { 0x4D, 0x54, 0x68, 0x64 }));
+            toReturn.Add(new Format("midi", "audio/midi", 0, new byte[] { 0x4D, 0x54, 0x68, 0x64 }));
+            toReturn.Add(new Format("aiff", "audio/x-aiff", 0, new byte[] { 0x46, 0x4F, 0x52, 0x4D, 0x00 }));
+            toReturn.Add(new Format("flac", "audio/x-flac", 0, new byte[] { 0x66, 0x4C, 0x61, 0x43, 0x00, 0x00, 0x00, 0x22 }));
+            toReturn.Add(new Format("wma", "audio/x-ms-vma", 0, new byte[] { 0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C }));
+            toReturn.Add(new Format("ram", "audio/x-pn-realaudio", 0, new byte[] { 0x72, 0x74, 0x73, 0x70, 0x3A, 0x2F, 0x2F }));
+            toReturn.Add(new Format("rm", "audio/x-pn-realaudio", 0, new byte[] { 0x2E, 0x52, 0x4D, 0x46 }));
+            toReturn.Add(new Format("ra", "audio/x-realaudio", 0, new byte[] { 0x2E, 0x72, 0x61, 0xFD, 0x00 }));
+            toReturn.Add(new Format("wav", "audio/x-wav", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
+            toReturn.Add(new Format("webp", "audio/webp", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
+            toReturn.Add(new Format("pgm", "audio/x-portable-graymap", 0, new byte[] { 0x50, 0x35, 0x0A }));
+            toReturn.Add(new Format("rgb", "audio/x-rgb", 0, new byte[] { 0x01, 0xDA, 0x01, 0x01, 0x00, 0x03 }));
+            toReturn.Add(new Format("webm", "audio/webm", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
+            toReturn.Add(new Format("flv", "audio/x-flv", 0, new byte[] { 0x6, 0x4C, 0x56, 0x01 }));
+            toReturn.Add(new Format("mkv", "audio/x-matroska", 0, new byte[] { 0x1A, 0x45, 0xDF, 0xA3 }));
+            toReturn.Add(new Format("asx", "audio/x-ms-asf", 0, new byte[] { 0x3C }));
+            toReturn.Add(new Format("wmv", "audio/x-ms-wmv", 0, new byte[] { 0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11, 0xA6, 0xD9, 0x00, 0xAA, 0x00, 0x62, 0xCE, 0x6C }));
+            toReturn.Add(new Format("avi", "audio/x-msvideo", 0, new byte[] { 0x52, 0x49, 0x46, 0x46 }));
 
             return toReturn;
         }
